@@ -1,0 +1,58 @@
+{
+    "folders":
+    [
+        {
+            "path": "..",
+            "folder_exclude_patterns":
+            [
+                "Eigen",
+                "doc",
+                "lib/rf2aa/lib/ipd",
+                "cifutils",
+                "datahub",
+                // "ipd",
+                "fused_mpnn",
+                "se3_flow_matching",
+                ".venv",
+                ".nox",
+                "~/rfd/ipd"
+            ]
+        }
+    ],
+        "settings":
+     {
+        "PyYapf": {
+         "yapf_command": "yapf",
+         "on_save": false
+         // "yapf_command": "/home/sheffler/src/willutil/willutil/app/codealign",
+        },
+        "project_environment": {
+            "env": {
+                "PYTHON": "/home/sheffler/sw/MambaForge/envs/rfdsym312/bin/python",
+                // "PYTHON": "/home/sheffler/sw/MambaForge/envs/rfdsym312/bin/python",
+                "QT_QPA_PLATFORM": "xcb"
+            }
+        },
+        "LSP": {
+           "LSP-pyright": {
+              "settings": {
+                 // Put your settings here
+              }
+           }
+        }
+     },
+    "build_systems":
+    [
+        {
+            "name": "run main",
+            "shell_cmd": "cd $folder; PYTHONPATH=. \\$PYTHON -m gt 2>&1 | tee $folder/sublime_build.log",
+            "file_regex": "^\\s*File \"(...*?)\", line ([0-9]*)"
+        },
+        {
+            "name": "run_tests_on_file",
+            "shell_cmd": "cd $folder/lib/ipd; PYTHONPATH=../..:. \\$PYTHON ipd/tools/run_tests_on_file.py --quiet rf_diffusion ipd $file 2>&1 | tee $folder/sublime_build.log; PYTHONPATH=. python -mipd code filter_python_output $folder/sublime_build.log",
+            "file_regex": "^\\s*File \"(...*?)\", line ([0-9]*)"
+        }
+
+    ]
+}
