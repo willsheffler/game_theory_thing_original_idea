@@ -50,7 +50,7 @@
         },
         {
             "name": "run_tests_on_file",
-            "shell_cmd": "cd $folder/lib/ipd; PYTHONPATH=../..:. \\$PYTHON ipd/tools/run_tests_on_file.py --quiet rf_diffusion ipd $file 2>&1 | tee $folder/sublime_build.log; PYTHONPATH=. python -mipd code filter_python_output $folder/sublime_build.log",
+            "shell_cmd": "cd $folder; PYTHONPATH=. uv run /home/sheffler/rfd/lib/ipd/ipd/tools/run_tests_on_file.py --quiet gt $file 2>&1 | tee $folder/sublime_build.log; uv run python -mipd code filter_python_output $folder/sublime_build.log",
             "file_regex": "^\\s*File \"(...*?)\", line ([0-9]*)"
         }
 

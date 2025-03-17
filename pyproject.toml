@@ -3,125 +3,28 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
-# [build-system]
-# requires = ["setuptools >= 61.0"]
-# build-backend = "setuptools.build_meta"
-# [build-system]
-# requires = ["pdm-backend"]
-# build-backend = "pdm.backend"
 
 [project]
 name = 'gt'
 version = '0.1'
-requires-python = '>3.9,<4' # for woodys old pipeline stuff
+requires-python = '>=3.13'
 dependencies = [
-    'attrs',
-    'assertpy',
-    'colorlog',
-    'compact-json',
-    'hydra-core',
-    'httpx',
     'icecream',
-    'lark',
-    # 'numba',
+    "ipd",
+    "names>=0.3.0",
     'numpy',
-    'opt_einsum',
-    # 'pandas',
-    'pydantic',
+    "pytest>=8.3.5",
     'rich',
-    'RestrictedPython',
-    # 'seaborn',
-    'typer',
-    "toolz>=1.0.0",
+    'seaborn',
+    # '/home/sheffler/rfd/lib/ipd',
 ]
-[project.optional-dependencies]
-crud = [
-    'fastapi[standard]',
-    # 'psycopg2',
-    'sqlmodel',
-    'uvicorn[standard]',
-    'pdot',
-]
-tools = [
-    'submitit',
-    'gitpython',
-    'jinja2',
-    ]
-ml = [
-    'torch',
-    'pandas',
-    'biotite',
-    "willutil_cpp @ git+https://github.com/willsheffler/willutil_cpp"
-]
-# docs = [
-#     'sphinx',
-#     'sphinx-pydata-theme',
-#     'matplotlib',
-#     'pybtex',
-#     'sphinx_gallery',
-#     'apidoc',
-#     'bibliography',
-#     'preamble',
-#     'scraper',
-#     'switcher',
-# ]
-dev = [
-    'debugpy',
-    'hypothesis[numpy]',
-    "pytest",
-    'gitpython',
-    'jinja2',
-    'nox',
-    'pytest-xdist',
-    'pytest-sugar',
-    'pytest-cov',
-    'pytest-benchmark',
-    'pytest-dotenv',
-    'pyright[nodejs]',
-    'ruff',
-    'validate-pyproject[all]',
-    'yapf',
-]
-all = [
-    "biotite",
-    'debugpy',
-    'fastapi[standard]',
-    'gitpython',
-    'jinja2',
-    'pandas',
-    'pdot',
-    'psycopg2',
-    'scipy',
-    'sqlmodel',
-    'submitit',
-    'torch',
-    'uvicorn[standard]',
-    "willutil_cpp @ git+https://github.com/willsheffler/willutil_cpp",
-]
-[project.scripts]
-ipd = 'ipd.__main__:main'
 
 [tool.pytest.ini_options]
 minversion = '6.0'
 addopts = '-m "not ci" --disable-warnings --doctest-continue-on-failure'
 
 testpaths = [
-    'ipd/tests',
-    'ipd/atom',
-    'ipd/homog',
-    'ipd/sym',
-    'ipd/bunch.py',
-    'ipd/crud',
-    'ipd/dev',
-    'ipd/observer',
-    'ipd/pdb',
-    'ipd/protocol',
-    'ipd/tool',
-]
-markers = [
-    'slow: marks tests as slow to run',
-    'fast: tests that run in a second or two',
-    'ci: tests that should only run in ci',
+    'gt/tests',
 ]
 
 [tool.yapf]
@@ -177,3 +80,6 @@ target-version = 'py39'
 format.quote-style = 'single'
 format.indent-style = 'space'
 format.docstring-code-format = true
+
+[tool.uv.sources]
+ipd = { path = "../../rfd/lib/ipd" }

@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 
 import gt
 
-
 @dataclass
 class Strategy:
     """general stuff for iterated prisoners dilima games"""
@@ -29,6 +28,7 @@ class Strategy:
 
 class TitForTat(Strategy):
     """starts with cooperate and then copies the opponents last move"""
+
     def compute_move(self):
         if not self.history:
             return 'C'
@@ -91,3 +91,17 @@ class Prober(Strategy):
         if self.last_oppenent_moves(2) == 'DD': return 'D'
         if self.last_oppenent_moves(2) == 'CC': return 'C'
         return random.choice(['C', 'D'])
+
+class Cooperator(Strategy):
+
+    def compute_move(self):
+        if len(self.history) < 4: return 'C'
+        if self.last_oppenent_moves(4) == 'CCCC': return 'C'
+        return 'D'
+
+class Defector(Strategy):
+
+    def compute_move(self):
+        if len(self.history) < 4: return 'D'
+        if self.last_oppenent_moves(4) == 'DDDD': return 'D'
+        return 'C'
